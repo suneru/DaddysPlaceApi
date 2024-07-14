@@ -13,10 +13,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Configure<SqlConnectionSettings> (builder.Configuration.GetSection("ConnectionStrings"));
+builder.Services.AddScoped<IDbConnectors, DbConnectors>();
+builder.Services.Configure<SqlConnectionSettings>(builder.Configuration.GetSection("ConnectionStrings"));
 builder.Services.AddScoped<IUserRepository, UserRepositor>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IDbConnectors, DbConnectors>();
+builder.Services.AddScoped<IBillRepositor, BillRepositor>();
+builder.Services.AddScoped<IBillService, BillService>();
+
+
 
 var mapperConfiguration = new MapperConfiguration(cfg => 
 {

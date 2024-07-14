@@ -1,6 +1,6 @@
 ﻿using DaddysPlaceApi.Entity;
 using Dapper;
-using System.Data;
+
 
 
 namespace DaddysPlaceApi.Repository
@@ -50,7 +50,7 @@ namespace DaddysPlaceApi.Repository
 
         public async Task UpdateUser(int id, UserEntity userEntity)
         {
-            string sqlString = "UPDATE [User] SET Name=@Name,ContactNumber=@ContactNumber,Email=@Email,Password=@Password,Status=@Status,Role=@Role) " +
+            string sqlString = "UPDATE [User] SET Name=@Name,ContactNumber=@ContactNumber,Email=@Email,Password=@Password,Status=@Status,Role=@Role " +
                                "WHERE Id=@Id";
 
             var con = _dbConnectors.CreateConnection();
