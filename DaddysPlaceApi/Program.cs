@@ -19,6 +19,8 @@ builder.Services.AddScoped<IUserRepository, UserRepositor>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IBillRepositor, BillRepositor>();
 builder.Services.AddScoped<IBillService, BillService>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IItemService, ItemService>();
 
 
 

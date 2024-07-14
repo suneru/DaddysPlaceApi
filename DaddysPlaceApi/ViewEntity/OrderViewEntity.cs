@@ -3,8 +3,8 @@
     public class OrderViewEntity
     {
         public int Id { get; set; }
-        public long Price { get; set; }
-        public long? Discount { get; set; }
-        public long Total { get; set; }
+        public float Price { get; set; }
+        public float? Discount { get; set; }
+        public float Total { get; set; }
     }
 }
