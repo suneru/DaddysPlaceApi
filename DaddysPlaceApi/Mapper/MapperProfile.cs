@@ -9,6 +9,7 @@ namespace DaddysPlaceApi.Mapper
         public MapperProfile()
         {
             CreateMap<UserEntity, UserViewEntity>().ReverseMap();
+            CreateMap<ItemEntity, ItemViewEntity>().ReverseMap();
         }
     }
 }
