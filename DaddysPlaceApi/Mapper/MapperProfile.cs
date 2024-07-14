@@ -10,6 +10,10 @@ namespace DaddysPlaceApi.Mapper
         {
             CreateMap<UserEntity, UserViewEntity>().ReverseMap();
             CreateMap<ItemEntity, ItemViewEntity>().ReverseMap();
+            CreateMap<BillEntity, BillViewEntity>().ReverseMap();
+            CreateMap<OrderEntity, OrderViewEntity>().ReverseMap();
+            CreateMap<PaymentEntity, PaymentViewEntity>().ReverseMap();
+            CreateMap<ProductEntity, ProductViewEntity>().ReverseMap();
         }
     }
 }
