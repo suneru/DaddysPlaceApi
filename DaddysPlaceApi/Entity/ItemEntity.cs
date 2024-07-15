@@ -3,9 +3,9 @@
     public class ItemEntity
     {
         public int Id { get; set; }
-        public float Discount { get; set; }
-        public float Quanlity { get; set; }
-        public float Price { get; set; }
+        public double Discount { get; set; }
+        public double Quanlity { get; set; }
+        public double Price { get; set; }
         public int Frn_ProductId { get; set; }
         public int Frn_OrderId { get; set; }
     }
