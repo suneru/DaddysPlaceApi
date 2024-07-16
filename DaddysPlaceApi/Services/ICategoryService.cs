@@ -6,5 +6,6 @@ namespace DaddysPlaceApi.Services
     {
         public Task<IEnumerable<CategoryViewEntity>> GetCategories();
         public Task<CategoryViewEntity> GetCategory(int id);
+        public Task<int> CountOfCategories();
     }
 }

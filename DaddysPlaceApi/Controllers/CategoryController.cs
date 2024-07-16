@@ -1,5 +1,6 @@
-﻿using DaddysPlaceApi.Services;
-using Microsoft.AspNetCore.Http;
+﻿using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.Services;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DaddysPlaceApi.Controllers
@@ -27,12 +28,25 @@ namespace DaddysPlaceApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> FetchbyId(int id)
         {
-            var user = await _categoryService.GetCategory(id);
-            if (user == null)
+            var categores = await _categoryService.GetCategory(id);
+            if (categores == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+            return Ok(categores);
+        }
+
+
+
+        [HttpGet("GetCoutOfCategories")]
+        public async Task<IActionResult> CountOfCategories()
+        {
+            var items = await _categoryService.GetCategories();
+            var catgories = await _categoryService.CountOfCategories();
+            AllCategoriesEntity allCategoriesEntity = new AllCategoriesEntity();
+            allCategoriesEntity.CountofCategories= catgories;
+            allCategoriesEntity.AllCategories = items;
+            return Ok(allCategoriesEntity);
         }
     }
 }

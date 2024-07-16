@@ -28,5 +28,12 @@ namespace DaddysPlaceApi.Services
             var responce = _mapper.Map<IEnumerable<CategoryViewEntity>>(item);
             return responce;
         }
+
+        public async Task<int> CountOfCategories()
+        {
+            var item = await _categoryRepository.CountOfCategories();
+            var responce = (item);
+            return responce;
+        }
     }
 }

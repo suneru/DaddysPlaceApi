@@ -27,5 +27,13 @@ namespace DaddysPlaceApi.Repository
             var categories = await con.QueryAsync<CategoryEntity>(sqlString);
             return categories.ToList();
         }
+
+        public async Task<int> CountOfCategories()
+        {
+            string sqlString = "SELECT count(*) As CountCtegories FROM Category";
+            var con = _dbConnectors.CreateConnection();
+            var categoriesCount = await con.ExecuteScalarAsync<int>(sqlString);
+            return categoriesCount;
+        }
     }
 }
