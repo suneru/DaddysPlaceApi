@@ -34,7 +34,7 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "SELECT * FROM Bill WHERE Id=@Id";
             var con = _dbConnectors.CreateConnection();
-            var billId = await con.QuerySingleOrDefaultAsync(sqlString, new { id });
+            var billId = await con.QuerySingleOrDefaultAsync<BillEntity>(sqlString, new { id });
             return billId;
         }
 
@@ -50,9 +50,9 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "UPDATE [Bill] SET CreateOn=@CreateOn,Frn_UserId=@Frn_UserId,Frn_PaymentId=@Frn_PaymentId,Frn_OrderId=@Frn_OrderId " +
                                "WHERE Id=@Id";
-
+            billEntity.Id=id;
             var con = _dbConnectors.CreateConnection();
-            await con.ExecuteAsync(sqlString);
+            await con.ExecuteAsync(sqlString, billEntity);
 
         }
     }

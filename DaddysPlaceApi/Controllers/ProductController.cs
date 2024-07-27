@@ -19,14 +19,14 @@ namespace DaddysPlaceApi.Controllers
             _Logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("ListAdvance")]
         public async Task<IActionResult> ListAdvance()
         {
             var products = await _productService.GetProducts();
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("FetchbyId/{id}")]
         public async Task<IActionResult> FetchbyId(int id)
         {
             var product = await _productService.GetProduct(id);
@@ -37,7 +37,7 @@ namespace DaddysPlaceApi.Controllers
             return Ok(product);
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] ProductViewEntity productViewEntity)
         {
             _Logger.LogInformation($"Enter Request");
@@ -45,7 +45,7 @@ namespace DaddysPlaceApi.Controllers
             return StatusCode((int)HttpStatusCode.Created);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Edit/{id}")]
         public async Task<IActionResult> Edit(int id, [FromBody] ProductViewEntity productViewEntity)
         {
             var productExist = await _productService.GetProduct(id);
@@ -55,7 +55,7 @@ namespace DaddysPlaceApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var productExist = await _productService.GetProduct(id);

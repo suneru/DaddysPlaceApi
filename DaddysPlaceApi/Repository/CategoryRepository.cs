@@ -16,7 +16,7 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "SELECT * FROM Category WHERE Id=@Id";
             var con = _dbConnectors.CreateConnection();
-            var billId = await con.QuerySingleOrDefaultAsync(sqlString, new { id });
+            var billId = await con.QuerySingleOrDefaultAsync<CategoryEntity>(sqlString, new { id });
             return billId;
         }
 

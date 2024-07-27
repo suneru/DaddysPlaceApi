@@ -25,7 +25,7 @@ namespace DaddysPlaceApi.Controllers
             return Ok(items);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("FetchbyId/{id}")]
         public async Task<IActionResult> FetchbyId(int id)
         {
             var categores = await _categoryService.GetCategory(id);

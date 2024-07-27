@@ -36,8 +36,9 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "SELECT * FROM [User] WHERE Id=@Id";
             var con = _dbConnectors.CreateConnection();
-            var user = await con.QuerySingleOrDefaultAsync(sqlString,new {id});
+            var user = await con.QuerySingleOrDefaultAsync<UserEntity>(sqlString, new { id });
             return user;
+            
         }
 
         public async Task<IEnumerable<UserEntity>> GetUsers()
@@ -52,9 +53,9 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "UPDATE [User] SET Name=@Name,ContactNumber=@ContactNumber,Email=@Email,Password=@Password,Status=@Status,Role=@Role " +
                                "WHERE Id=@Id";
-
+            userEntity.Id=id;
             var con = _dbConnectors.CreateConnection();
-             await con.ExecuteAsync(sqlString);
+             await con.ExecuteAsync(sqlString, userEntity);
            
         }
     }

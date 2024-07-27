@@ -34,7 +34,7 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "SELECT * FROM [Product] WHERE Id=@Id";
             var con = _dbConnectors.CreateConnection();
-            var product = await con.QuerySingleOrDefaultAsync(sqlString, new { id });
+            var product = await con.QuerySingleOrDefaultAsync<ProductEntity>(sqlString, new { id });
             return product;
         }
 
@@ -50,9 +50,9 @@ namespace DaddysPlaceApi.Repository
         {
             string sqlString = "UPDATE [Product] SET Name=@Name,Price=@Price,Image=@Image,Category=@Category " +
                                "WHERE Id=@Id";
-
+            productEntity.Id=id;
             var con = _dbConnectors.CreateConnection();
-            await con.ExecuteAsync(sqlString);
+            await con.ExecuteAsync(sqlString, productEntity);
 
         }
     }
