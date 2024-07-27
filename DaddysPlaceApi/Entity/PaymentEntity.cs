@@ -3,9 +3,9 @@
     public class PaymentEntity
     {
         public int Id { get; set; }
-        public double Receive { get; set; }
-        public double Refund { get; set; }
-        public int Type { get; set; }
+        public double Receive_Amount { get; set; }
+        public double Balance_Amount { get; set; }
+        public int Payment_Type { get; set; }
         public int Frn_OrderId { get; set; }
     }
 }

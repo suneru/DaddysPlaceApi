@@ -25,7 +25,7 @@ namespace DaddysPlaceApi.Repository
         }
         public async Task DeleteOrder(int id)
         {
-            string sqlString = "DELETE * FROM [Order] WHERE Id=@Id";
+            string sqlString = "DELETE FROM [Order] WHERE Id=@Id";
             var con = _dbConnectors.CreateConnection();
             await con.QueryAsync(sqlString, new { id });
         }

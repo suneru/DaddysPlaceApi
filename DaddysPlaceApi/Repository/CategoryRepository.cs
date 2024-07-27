@@ -20,6 +20,7 @@ namespace DaddysPlaceApi.Repository
             return billId;
         }
 
+       
         public async Task<IEnumerable<CategoryEntity>> GetCategories()
         {
             string sqlString = "SELECT * FROM Category";
