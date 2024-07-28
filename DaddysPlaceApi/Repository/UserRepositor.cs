@@ -41,6 +41,15 @@ namespace DaddysPlaceApi.Repository
             
         }
 
+        public async Task<UserEntity> GetUserName(string name)
+        {
+            string sqlString = "SELECT * FROM [User] WHERE Name=@name";
+            var con = _dbConnectors.CreateConnection();
+            var user = await con.QuerySingleOrDefaultAsync<UserEntity>(sqlString, new { name });
+            return user;
+
+        }
+
         public async Task<IEnumerable<UserEntity>> GetUsers()
         {
             string sqlString = "SELECT * FROM [User]";

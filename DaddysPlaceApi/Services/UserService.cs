@@ -38,6 +38,13 @@ namespace DaddysPlaceApi.Services
             return responce;
         }
 
+        public async Task<UserViewEntity> GetUserName(string name)
+        {
+            var user = await _userRepository.GetUserName(name);
+            var responce = _mapper.Map<UserViewEntity>(user);
+            return responce;
+        }
+
         public async Task<IEnumerable<UserViewEntity>> GetUsers()
         {
             var users= await _userRepository.GetUsers();

@@ -3,6 +3,8 @@ using DaddysPlaceApi;
 using DaddysPlaceApi.Mapper;
 using DaddysPlaceApi.Repository;
 using DaddysPlaceApi.Services;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,36 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Daddy's Place", Version = "v1" });
+    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+
+builder.Services.AddAuthentication()
+    .AddJwtBearer();
 builder.Services.AddScoped<IDbConnectors, DbConnectors>();
 builder.Services.Configure<SqlConnectionSettings>(builder.Configuration.GetSection("ConnectionStrings"));
 builder.Services.AddScoped<IUserRepository, UserRepositor>();

@@ -1,5 +1,6 @@
 ﻿using DaddysPlaceApi.Services;
 using DaddysPlaceApi.ViewEntity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -8,10 +9,12 @@ namespace DaddysPlaceApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
         public ILogger<UserController> _Logger { get; }
+
 
         public UserController(IUserService userService,ILogger<UserController> logger)
         {
@@ -30,6 +33,17 @@ namespace DaddysPlaceApi.Controllers
         public async Task<IActionResult> FetchbyId(int id)
         {
             var user = await _userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+        [HttpGet("FetchbyUserName/{name}")]
+        public async Task<IActionResult> FetchbyId(string name)
+        {
+            var user = await _userService.GetUserName(name);
             if (user == null)
             {
                 return NotFound();
