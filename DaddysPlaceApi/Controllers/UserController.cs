@@ -40,10 +40,10 @@ namespace DaddysPlaceApi.Controllers
             return Ok(user);
         }
 
-        [HttpPost("FetchbyUserName")]
-        public async Task<IActionResult> FetchbyId([FromBody] UserViewEntity userViewEntity)
+        [HttpGet("FetchbyUserName")]
+        public async Task<IActionResult> FetchbyUserName( string email,string password)
         {
-            var user = await _userService.GetUserName(userViewEntity);
+            var user = await _userService.GetUserName(email, password);
             if (user == null)
             {
                 return NotFound();

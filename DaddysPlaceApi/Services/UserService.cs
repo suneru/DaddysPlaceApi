@@ -38,9 +38,9 @@ namespace DaddysPlaceApi.Services
             return responce;
         }
 
-        public async Task<UserViewEntity> GetUserName(UserViewEntity userViewEntity)
+        public async Task<UserViewEntity> GetUserName(string email, string password)
         {
-            var user = await _userRepository.GetUserName(userViewEntity.Email, userViewEntity.Password);
+            var user = await _userRepository.GetUserName(email, password);
             var responce = _mapper.Map<UserViewEntity>(user);
             return responce;
         }
