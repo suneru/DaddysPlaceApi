@@ -6,7 +6,7 @@ namespace DaddysPlaceApi.Repository
     {
         public Task<IEnumerable<UserEntity>> GetUsers();
         public Task<UserEntity> GetUser(int id);
-        public Task<UserEntity> GetUserName(string name);
+        public Task<UserEntity> GetUserName(string email,string password);
         public Task<UserEntity> CreateUser(UserEntity userEntity);
         public Task UpdateUser(int id, UserEntity userEntity);
         public Task DeleteUser(int id);

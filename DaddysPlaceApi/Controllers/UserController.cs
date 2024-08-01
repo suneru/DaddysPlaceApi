@@ -40,10 +40,10 @@ namespace DaddysPlaceApi.Controllers
             return Ok(user);
         }
 
-        [HttpGet("FetchbyUserName/{name}")]
-        public async Task<IActionResult> FetchbyId(string name)
+        [HttpPost("FetchbyUserName")]
+        public async Task<IActionResult> FetchbyId([FromBody] UserViewEntity userViewEntity)
         {
-            var user = await _userService.GetUserName(name);
+            var user = await _userService.GetUserName(userViewEntity);
             if (user == null)
             {
                 return NotFound();
@@ -78,5 +78,7 @@ namespace DaddysPlaceApi.Controllers
             await _userService.DeleteUser(id);
             return NoContent();
         }
+
+
     }
 }

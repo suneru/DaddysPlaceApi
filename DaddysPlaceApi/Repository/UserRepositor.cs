@@ -41,11 +41,11 @@ namespace DaddysPlaceApi.Repository
             
         }
 
-        public async Task<UserEntity> GetUserName(string name)
+        public async Task<UserEntity> GetUserName(string email, string password)
         {
-            string sqlString = "SELECT * FROM [User] WHERE Name=@name";
+            string sqlString = "SELECT * FROM [User] WHERE Email=@email and Password=@password ";
             var con = _dbConnectors.CreateConnection();
-            var user = await con.QuerySingleOrDefaultAsync<UserEntity>(sqlString, new { name });
+            var user = await con.QuerySingleOrDefaultAsync<UserEntity>(sqlString, new { email, password } );
             return user;
 
         }
