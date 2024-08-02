@@ -36,6 +36,13 @@ namespace DaddysPlaceApi.Services
             return responce;
         }
 
+        public async Task<IEnumerable<ProductViewEntity>> GetCategoryWiseProductItem(int Category)
+        {
+            var products = await _productRepository.GetCategoryWiseProductItem(Category);
+            var responce = _mapper.Map<IEnumerable<ProductViewEntity>>(products);
+            return responce;
+        }
+
         public async Task<IEnumerable<ProductViewEntity>> GetProducts()
         {
             var products = await _productRepository.GetProducts();

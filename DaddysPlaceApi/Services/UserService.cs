@@ -45,6 +45,13 @@ namespace DaddysPlaceApi.Services
             return responce;
         }
 
+        public async Task<UserViewEntity> GetUserexist(string email)
+        {
+            var user = await _userRepository.GetUserexist(email);
+            var responce = _mapper.Map<UserViewEntity>(user);
+            return responce;
+        }
+
         public async Task<IEnumerable<UserViewEntity>> GetUsers()
         {
             var users= await _userRepository.GetUsers();

@@ -38,6 +38,14 @@ namespace DaddysPlaceApi.Repository
             return product;
         }
 
+        public async Task<IEnumerable<ProductEntity>> GetCategoryWiseProductItem(int Category)
+        {
+            string sqlString = "SELECT * FROM [Product] WHERE Category=@Category";
+            var con = _dbConnectors.CreateConnection();
+            var product = await con.QueryAsync<ProductEntity>(sqlString, new { Category });
+            return product;
+        }
+
         public async Task<IEnumerable<ProductEntity>> GetProducts()
         {
             string sqlString = "SELECT * FROM [Product]";

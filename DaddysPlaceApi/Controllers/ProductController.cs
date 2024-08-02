@@ -39,6 +39,14 @@ namespace DaddysPlaceApi.Controllers
             return Ok(product);
         }
 
+        [HttpGet("GetCategoryWiseProductItem/{categoryId}")]
+        public async Task<IActionResult> GetCategoryWiseProductItem(int categoryId)
+        {
+            var product = await _productService.GetCategoryWiseProductItem(categoryId);
+            
+            return Ok(product);
+        }
+
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] ProductViewEntity productViewEntity)
         {

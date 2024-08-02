@@ -55,8 +55,17 @@ namespace DaddysPlaceApi.Controllers
         public async Task<IActionResult> Add([FromBody] UserViewEntity userViewEntity) 
         {
             _Logger.LogInformation($"Enter Request");
-            var createResponce= await _userService.CreateUser(userViewEntity);
-            return StatusCode((int)HttpStatusCode.Created);
+            UserViewEntity userExist =new UserViewEntity();
+
+            userExist = await _userService.GetUserexist(userViewEntity.Email);
+            if (userExist == null)
+            {
+                var createResponce = await _userService.CreateUser(userViewEntity);
+                return StatusCode((int)HttpStatusCode.Created);
+            }
+            
+            return StatusCode((int)HttpStatusCode.Found);
+
         }
 
         [HttpPut("Edit/{id}")]
