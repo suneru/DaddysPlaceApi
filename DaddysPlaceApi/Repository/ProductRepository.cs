@@ -1,4 +1,5 @@
 ﻿using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.Entity.AllEntity;
 using Dapper;
 
 namespace DaddysPlaceApi.Repository
@@ -14,8 +15,8 @@ namespace DaddysPlaceApi.Repository
 
         public async Task<ProductEntity> CreateProduct(ProductEntity productEntity)
         {
-            string sqlString = "INSERT INTO [Product] (Name,Price,Image,Category) " +
-                               " VALUES (@Name,@Price,@Image,@Category)" +
+            string sqlString = "INSERT INTO [Product] (Name,Price,Discount,Image,Category) " +
+                               " VALUES (@Name,@Price,@Discount,@Image,@Category)" +
                                "SELECT CAST(SCOPE_IDENTITY() AS int)";
 
             var con = _dbConnectors.CreateConnection();
@@ -30,6 +31,13 @@ namespace DaddysPlaceApi.Repository
             await con.QueryAsync(sqlString, new { id });
         }
 
+        public async Task<ProductEntity> FetchbyProductName(string name)
+        {
+            string sqlString = "SELECT * FROM [Product] WHERE name=@name";
+            var con = _dbConnectors.CreateConnection();
+            var product = await con.QuerySingleOrDefaultAsync<ProductEntity>(sqlString, new { name });
+            return product;
+        }
         public async Task<ProductEntity> GetProduct(int id)
         {
             string sqlString = "SELECT * FROM [Product] WHERE Id=@Id";
@@ -54,9 +62,17 @@ namespace DaddysPlaceApi.Repository
             return product.ToList();
         }
 
+        public async Task<IEnumerable<AllProductEntity>> GetProductsJoin()
+        {
+            string sqlString = "SELECT    P.Id, P.Name, P.Price, P.Discount, P.Image, C.CategoryName  FROM [Product] AS P INNER JOIN Category AS C ON P.Category = C.Id ORDER BY P.Id DESC";
+            var con = _dbConnectors.CreateConnection();
+            var product = await con.QueryAsync<AllProductEntity>(sqlString);
+            return product.ToList();
+        }
+
         public async Task UpdateProduct(int id, ProductEntity productEntity)
         {
-            string sqlString = "UPDATE [Product] SET Name=@Name,Price=@Price,Image=@Image,Category=@Category " +
+            string sqlString = "UPDATE [Product] SET Name=@Name,Price=@Price,Discount=@Discount,Image=@Image,Category=@Category " +
                                "WHERE Id=@Id";
             productEntity.Id=id;
             var con = _dbConnectors.CreateConnection();

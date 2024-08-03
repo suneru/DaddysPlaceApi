@@ -28,10 +28,28 @@ namespace DaddysPlaceApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("ListAdvanceALL")]
+        public async Task<IActionResult> ListAdvanceALL()
+        {
+            var products = await _productService.GetProductsJoin();
+            return Ok(products);
+        }
+
         [HttpGet("FetchbyId/{id}")]
         public async Task<IActionResult> FetchbyId(int id)
         {
             var product = await _productService.GetProduct(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
+        }
+
+        [HttpGet("FetchbyId/{name}")]
+        public async Task<IActionResult> FetchbyProductName(string name)
+        {
+            var product = await _productService.FetchbyProductName(name);
             if (product == null)
             {
                 return NotFound();
@@ -47,12 +65,24 @@ namespace DaddysPlaceApi.Controllers
             return Ok(product);
         }
 
+
+
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] ProductViewEntity productViewEntity)
         {
             _Logger.LogInformation($"Enter Request");
-            var createResponce = await _productService.CreateProduct(productViewEntity);
-            return StatusCode((int)HttpStatusCode.Created);
+            ProductViewEntity productExist = new ProductViewEntity();
+            productExist = await _productService.FetchbyProductName(productViewEntity.Name);
+            if (productExist == null)
+            {
+                var createResponce = await _productService.CreateProduct(productViewEntity);
+                return Ok(createResponce);
+            }
+            else
+            {
+                return StatusCode((int)HttpStatusCode.Found);
+            }
+
         }
 
         [HttpPut("Edit/{id}")]

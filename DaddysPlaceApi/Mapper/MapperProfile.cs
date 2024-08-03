@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.Entity.AllEntity;
 using DaddysPlaceApi.ViewEntity;
-
+using DaddysPlaceApi.ViewEntity.AllViewEntity;
 namespace DaddysPlaceApi.Mapper
 {
     public class MapperProfile : Profile
@@ -14,6 +15,7 @@ namespace DaddysPlaceApi.Mapper
             CreateMap<OrderEntity, OrderViewEntity>().ReverseMap();
             CreateMap<PaymentEntity, PaymentViewEntity>().ReverseMap();
             CreateMap<ProductEntity, ProductViewEntity>().ReverseMap();
+            CreateMap<AllProductEntity, AllProductViewEntity>().ReverseMap();
             CreateMap<CategoryEntity, CategoryViewEntity>().ReverseMap();
         }
     }

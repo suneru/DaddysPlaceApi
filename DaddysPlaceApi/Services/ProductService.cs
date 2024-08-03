@@ -2,6 +2,7 @@
 using DaddysPlaceApi.Entity;
 using DaddysPlaceApi.Repository;
 using DaddysPlaceApi.ViewEntity;
+using DaddysPlaceApi.ViewEntity.AllViewEntity;
 
 namespace DaddysPlaceApi.Services
 {
@@ -29,6 +30,12 @@ namespace DaddysPlaceApi.Services
             await _productRepository.DeleteProduct(id);
         }
 
+        public async Task<ProductViewEntity> FetchbyProductName(string name)
+        {
+            var products = await _productRepository.FetchbyProductName(name);
+            var responce = _mapper.Map<ProductViewEntity>(products);
+            return responce;
+        }
         public async Task<ProductViewEntity> GetProduct(int id)
         {
             var products = await _productRepository.GetProduct(id);
@@ -47,6 +54,13 @@ namespace DaddysPlaceApi.Services
         {
             var products = await _productRepository.GetProducts();
             var responce = _mapper.Map<IEnumerable<ProductViewEntity>>(products);
+            return responce;
+        }
+
+        public async Task<IEnumerable<AllProductViewEntity>> GetProductsJoin()
+        {
+            var products = await _productRepository.GetProductsJoin();
+            var responce = _mapper.Map<IEnumerable<AllProductViewEntity>>(products);
             return responce;
         }
 

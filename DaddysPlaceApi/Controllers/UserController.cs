@@ -63,8 +63,11 @@ namespace DaddysPlaceApi.Controllers
                 var createResponce = await _userService.CreateUser(userViewEntity);
                 return StatusCode((int)HttpStatusCode.Created);
             }
+            else {
+                return StatusCode((int)HttpStatusCode.Found);
+            }
             
-            return StatusCode((int)HttpStatusCode.Found);
+           
 
         }
 
