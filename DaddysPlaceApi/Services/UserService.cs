@@ -59,10 +59,16 @@ namespace DaddysPlaceApi.Services
             return responce;
         }
 
-        public async Task UpdateUser(int id, UserViewEntity userViewEntity)
+        public async Task UpdateUser(int id, UserVEditEntity userVEditEntity)
         {
-            var entity = _mapper.Map<UserEntity>(userViewEntity);
-            await _userRepository.UpdateUser(id,entity);
+            var entity = _mapper.Map<UsereditEntity>(userVEditEntity);
+            await _userRepository.UpdateUser(id, entity);
+        }
+
+        public async Task UpdateUserRole(int id, UserEditVRoleEntity userEditVRoleEntity)
+        {
+            var entity = _mapper.Map<UserEditRoleEntity>(userEditVRoleEntity);
+            await _userRepository.UpdateUserRole(id,entity);
         }
     }
 }

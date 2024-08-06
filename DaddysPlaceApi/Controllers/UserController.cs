@@ -1,4 +1,5 @@
-﻿using DaddysPlaceApi.Services;
+﻿using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.Services;
 using DaddysPlaceApi.ViewEntity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -72,13 +73,24 @@ namespace DaddysPlaceApi.Controllers
         }
 
         [HttpPut("Edit/{id}")]
-        public async Task<IActionResult> Edit(int id,[FromBody] UserViewEntity userViewEntity)
+        public async Task<IActionResult> Edit(int id,[FromBody] UserVEditEntity userVEditEntity)
         {
             var userExist = await _userService.GetUser(id);
             if (userExist == null)
             return NotFound();
-            await _userService.UpdateUser(id, userViewEntity);
-            return NoContent();
+            await _userService.UpdateUser(id, userVEditEntity);
+            return Ok("Success");
+        }
+
+        [HttpPut("EditRole/{id}")]
+
+        public async Task<IActionResult> EditRole(int id, [FromBody] UserEditVRoleEntity userEditVRoleEntity)
+        {
+            var userExist = await _userService.GetUser(id);
+            if (userExist == null)
+                return NotFound();
+            await _userService.UpdateUserRole(id, userEditVRoleEntity);
+            return Ok("Success");
         }
 
         [HttpDelete("Delete/{id}")]

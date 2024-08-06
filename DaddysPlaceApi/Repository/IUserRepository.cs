@@ -1,4 +1,5 @@
 ﻿using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.ViewEntity;
 
 namespace DaddysPlaceApi.Repository
 {
@@ -9,7 +10,8 @@ namespace DaddysPlaceApi.Repository
         public Task<UserEntity> GetUserName(string email,string password);
         public Task<UserEntity> GetUserexist(string email);
         public Task<UserEntity> CreateUser(UserEntity userEntity);
-        public Task UpdateUser(int id, UserEntity userEntity);
+        public Task UpdateUser(int id, UsereditEntity userEditEntity);
+        public Task UpdateUserRole(int id, UserEditRoleEntity userEditRoleEntity);
         public Task DeleteUser(int id);
 
 

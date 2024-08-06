@@ -10,4 +10,19 @@
         public bool Status { get; set; }
         public string Role { get; set; }
     }
+
+    public class UsereditEntity
+    {
+        public int Id { get; set; }
+        public bool Status { get; set; }
+       
+    }
+
+    public class UserEditRoleEntity
+    {
+        public int Id { get; set; }
+
+        public string Role { get; set; }
+
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.ViewEntity;
 using Dapper;
 
 
@@ -67,14 +68,34 @@ namespace DaddysPlaceApi.Repository
             return user.ToList();
         }
 
-        public async Task UpdateUser(int id, UserEntity userEntity)
-        {
-            string sqlString = "UPDATE [User] SET Name=@Name,ContactNumber=@ContactNumber,Email=@Email,Password=@Password,Status=@Status,Role=@Role " +
-                               "WHERE Id=@Id";
-            userEntity.Id=id;
-            var con = _dbConnectors.CreateConnection();
-             await con.ExecuteAsync(sqlString, userEntity);
+        //public async Task UpdateUser(int id, UserEntity userEntity)
+        //{
+        //    string sqlString = "UPDATE [User] SET Name=@Name,ContactNumber=@ContactNumber,Email=@Email,Password=@Password,Status=@Status,Role=@Role " +
+        //                       "WHERE Id=@Id";
+        //    userEntity.Id=id;
+        //    var con = _dbConnectors.CreateConnection();
+        //     await con.ExecuteAsync(sqlString, userEntity);
            
+        //}
+
+        public async Task UpdateUser(int id, UsereditEntity userEditEntity)
+        {
+            string sqlString = "UPDATE [User] SET Status=@Status" +
+                               " WHERE Id=@Id";
+            userEditEntity.Id = id;
+            var con = _dbConnectors.CreateConnection();
+            await con.ExecuteAsync(sqlString, userEditEntity);
+
+        }
+
+        public async Task UpdateUserRole(int id, UserEditRoleEntity userEditRoleEntity)
+        {
+            string sqlString = "UPDATE [User] SET Role=@Role" +
+                               " WHERE Id=@Id";
+            userEditRoleEntity.Id = id;
+            var con = _dbConnectors.CreateConnection();
+            await con.ExecuteAsync(sqlString, userEditRoleEntity);
+
         }
     }
 }
