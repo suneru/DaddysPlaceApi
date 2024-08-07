@@ -9,5 +9,6 @@ namespace DaddysPlaceApi.Repository
         public Task<BillEntity> CreateBill(BillEntity billEntity);
         public Task UpdateBill(int id, BillEntity billEntity);
         public Task DeleteBill(int id);
+        public Task<BillOrdernoEntity> GetBillOrderNo();
     }
 }

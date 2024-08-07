@@ -50,6 +50,12 @@ namespace DaddysPlaceApi.Services
             await _billRepository.UpdateBill(id, entity);
         }
 
-       
+        public async Task<BillViewOrdernoEntity> GetBillOrderNo()
+        {
+            var orderno = await _billRepository.GetBillOrderNo();
+            var responce = _mapper.Map<BillViewOrdernoEntity>(orderno);
+            return responce;
+        }
+
     }
 }

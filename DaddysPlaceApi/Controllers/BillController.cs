@@ -39,7 +39,19 @@ namespace DaddysPlaceApi.Controllers
             return Ok(user);
         }
 
-        [HttpPost("Add")]
+
+        [HttpGet("NextOrderNo")]
+        public async Task<IActionResult> NextOrderNo()
+        {
+            var user = await _billService.GetBillOrderNo();
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
+[HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] BillViewEntity billViewEntity)
         {
             _Logger.LogInformation($"Enter Request");
@@ -66,5 +78,8 @@ namespace DaddysPlaceApi.Controllers
             await _billService.DeleteBill(id);
             return NoContent();
         }
+
+
+
     }
 }

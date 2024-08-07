@@ -1,4 +1,5 @@
 ﻿using DaddysPlaceApi.Entity;
+using DaddysPlaceApi.ViewEntity;
 using Dapper;
 
 namespace DaddysPlaceApi.Repository
@@ -14,8 +15,8 @@ namespace DaddysPlaceApi.Repository
 
         public async Task<BillEntity> CreateBill(BillEntity billEntity)
         {
-            string sqlString = "INSERT INTO Bill (CreateOn,Frn_UserId,Frn_PaymentId,Frn_OrderId) " +
-                               " VALUES (@CreateOn,@Frn_UserId,@Frn_PaymentId,@Frn_OrderId)" +
+            string sqlString = "INSERT INTO Bill (CreateOn,Frn_UserId,Frn_PaymentId,Frn_OrderId,TotalAmount) " +
+                               " VALUES (@CreateOn,@Frn_UserId,@Frn_PaymentId,@Frn_OrderId,@TotalAmount)" +
                                "SELECT CAST(SCOPE_IDENTITY() AS int)";
 
             var con = _dbConnectors.CreateConnection();
@@ -48,12 +49,20 @@ namespace DaddysPlaceApi.Repository
 
         public async Task UpdateBill(int id, BillEntity billEntity)
         {
-            string sqlString = "UPDATE [Bill] SET CreateOn=@CreateOn,Frn_UserId=@Frn_UserId,Frn_PaymentId=@Frn_PaymentId,Frn_OrderId=@Frn_OrderId " +
+            string sqlString = "UPDATE [Bill] SET CreateOn=@CreateOn,Frn_UserId=@Frn_UserId,Frn_PaymentId=@Frn_PaymentId,Frn_OrderId=@Frn_OrderId,TotalAmount=@TotalAmount " +
                                "WHERE Id=@Id";
             billEntity.Id=id;
             var con = _dbConnectors.CreateConnection();
             await con.ExecuteAsync(sqlString, billEntity);
 
+        }
+
+        public async Task<BillOrdernoEntity> GetBillOrderNo()
+        {
+            string sqlString = "select next value for OrderNo AS BillOrderNo";
+            var con = _dbConnectors.CreateConnection();
+            var billId = await con.QuerySingleOrDefaultAsync<BillOrdernoEntity>(sqlString);
+            return billId;
         }
     }
 }
