@@ -6,7 +6,7 @@ namespace DaddysPlaceApi.Repository
     {
         public Task<IEnumerable<ItemEntity>> GetItems();
         public Task<ItemEntity> GetItem(int id);
-        public Task<ItemEntity> CreateItem(ItemEntity itemEntity);
+        public Task<ItemEntity[]> CreateItem(ItemEntity[] itemEntity);
         public Task UpdateItem(int id, ItemEntity itemEntity);
         public Task DeleteItem(int id);
     }

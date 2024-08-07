@@ -1,5 +1,6 @@
 ﻿using DaddysPlaceApi.Entity;
 using Dapper;
+using System.Linq;
 
 namespace DaddysPlaceApi.Repository
 {
@@ -12,15 +13,18 @@ namespace DaddysPlaceApi.Repository
             this._dbConnectors = dbConnectors;
         }
 
-        public async Task<ItemEntity> CreateItem(ItemEntity itemEntity)
+        public async Task<ItemEntity[]> CreateItem(ItemEntity[] itemEntity)
         {
-            string sqlString = "INSERT INTO Item (Discount,Quanlity,Price,Frn_ProductId,Frn_OrderId) " +
+            foreach (var item in itemEntity)
+            {
+                string sqlString = "INSERT INTO Item (Discount,Quanlity,Price,Frn_ProductId,Frn_OrderId) " +
                                " VALUES (@Discount,@Quanlity,@Price,@Frn_ProductId,@Frn_OrderId)" +
                                "SELECT CAST(SCOPE_IDENTITY() AS int)";
-
+           
             var con = _dbConnectors.CreateConnection();
-            int itemId = await con.ExecuteScalarAsync<int>(sqlString, itemEntity);
-            itemEntity.Id = itemId;
+            int itemId = await con.ExecuteScalarAsync<int>(sqlString, item);
+            item.Id = itemId;
+            }
             return itemEntity;
         }
         public async Task DeleteItem(int id)

@@ -16,11 +16,11 @@ namespace DaddysPlaceApi.Services
             this._mapper = mapper;
         }
 
-        public async Task<ItemViewEntity> CreateItem(ItemViewEntity itemViewEntity)
+        public async Task<ItemViewEntity[]> CreateItem(ItemViewEntity[] itemViewEntity)
         {
-            var entity = _mapper.Map<ItemEntity>(itemViewEntity);
+            var entity = _mapper.Map<ItemEntity[]>(itemViewEntity);
             var createItem = await _itemRepository.CreateItem(entity);
-            var responce = _mapper.Map<ItemViewEntity>(createItem);
+            var responce = _mapper.Map<ItemViewEntity[]>(createItem);
             return responce;
         }
 

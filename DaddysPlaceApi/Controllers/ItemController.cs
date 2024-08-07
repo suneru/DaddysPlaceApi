@@ -40,7 +40,7 @@ namespace DaddysPlaceApi.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] ItemViewEntity itemViewEntity)
+        public async Task<IActionResult> Add([FromBody] ItemViewEntity[] itemViewEntity)
         {
             _Logger.LogInformation($"Enter Request");
             var createResponce = await _itemService.CreateItem(itemViewEntity);
