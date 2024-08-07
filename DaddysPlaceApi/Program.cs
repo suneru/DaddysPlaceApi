@@ -60,6 +60,9 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
+builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
+
 
 
 
