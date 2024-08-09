@@ -44,7 +44,7 @@ namespace DaddysPlaceApi.Controllers
         {
             _Logger.LogInformation($"Enter Request");
             var createResponce = await _itemService.CreateItem(itemViewEntity);
-            return StatusCode((int)HttpStatusCode.Created);
+            return Ok(createResponce);
         }
 
         [HttpPut("Edit/{id}")]

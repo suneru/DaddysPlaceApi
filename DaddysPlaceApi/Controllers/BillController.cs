@@ -56,7 +56,7 @@ namespace DaddysPlaceApi.Controllers
         {
             _Logger.LogInformation($"Enter Request");
             var createResponce = await _billService.CreateBill(billViewEntity);
-            return StatusCode((int)HttpStatusCode.Created);
+            return Ok(createResponce);
         }
 
         [HttpPut("Edit/{id}")]

@@ -45,8 +45,8 @@ namespace DaddysPlaceApi.Controllers
             {
                 _Logger.LogInformation($"Enter Request");
                 var createResponce = await _paymentService.CreatePayment(paymentViewEntity);
-                return StatusCode((int)HttpStatusCode.Created);
-            }
+                return Ok(createResponce);
+        }
 
             [HttpPut("Edit/{id}")]
             public async Task<IActionResult> Edit(int id, [FromBody] PaymentViewEntity paymentViewEntity)
